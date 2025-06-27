@@ -39,12 +39,12 @@ namespace StudentReportCard
                 con.Open();
 
                 string query = "";
-                if (string.IsNullOrEmpty(hfStudentId.Value)) // INSERT
+                if (string.IsNullOrEmpty(hfStudentId.Value)) 
                 {
                     query = @"INSERT INTO Students (RollNo, AdmNo, Name, DOB, ClassSection, MotherName, FatherName)
                           VALUES (@RollNo, @AdmNo, @Name, @DOB, @ClassSection, @MotherName, @FatherName)";
                 }
-                else // UPDATE
+                else 
                 {
                     query = @"UPDATE Students SET RollNo=@RollNo, AdmNo=@AdmNo, Name=@Name, DOB=@DOB,
                           ClassSection=@ClassSection, MotherName=@MotherName, FatherName=@FatherName
