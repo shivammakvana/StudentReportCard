@@ -23,7 +23,6 @@ namespace StudentReportCard
             }
         }
 
-        // Load students for the drop-down list
         void LoadStudents()
         {
             using (SqlConnection con = new SqlConnection(conStr))
@@ -39,7 +38,6 @@ namespace StudentReportCard
             }
         }
 
-        // Load marks into the GridView
         void LoadMarks()
         {
             using (SqlConnection con = new SqlConnection(conStr))
@@ -54,10 +52,8 @@ namespace StudentReportCard
             }
         }
 
-        // Save or update marks entry
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            // Basic validations (can be expanded as needed)
             if (string.IsNullOrEmpty(txtSubject.Text))
                 return;
 
@@ -73,12 +69,12 @@ namespace StudentReportCard
                 con.Open();
                 string query = "";
 
-                if (string.IsNullOrEmpty(hfMarkId.Value))  // Insert new marks entry
+                if (string.IsNullOrEmpty(hfMarkId.Value))  
                 {
                     query = @"INSERT INTO Marks (StudentId, SubjectName, Periodic, Notebook, Activity, Exam, Total, Grade, Term)
                           VALUES (@StudentId, @SubjectName, @Periodic, @Notebook, @Activity, @Exam, @Total, @Grade, @Term)";
                 }
-                else  // Update existing marks entry
+                else
                 {
                     query = @"UPDATE Marks SET StudentId=@StudentId, SubjectName=@SubjectName, Periodic=@Periodic,
                           Notebook=@Notebook, Activity=@Activity, Exam=@Exam, Total=@Total, Grade=@Grade, Term=@Term
@@ -105,7 +101,6 @@ namespace StudentReportCard
             LoadMarks();
         }
 
-        // Handle editing or deleting marks from the GridView
         protected void gvMarks_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
         {
             if (e.CommandName == "EditMark")
@@ -147,7 +142,6 @@ namespace StudentReportCard
             }
         }
 
-        // Determine grade based on total marks
         string GetGrade(int total)
         {
             if (total >= 90) return "A+";
@@ -159,7 +153,6 @@ namespace StudentReportCard
             else return "F";
         }
 
-        // Clear marks input fields after save/update
         void ClearFields()
         {
             hfMarkId.Value = "";
